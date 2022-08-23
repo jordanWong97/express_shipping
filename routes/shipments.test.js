@@ -15,4 +15,25 @@ describe("POST /", function () {
 
     expect(resp.body).toEqual({ shipped: expect.any(Number) });
   });
+
+  test("invalid", async function () {
+    const resp = await request(app).post("/shipments").send({
+      productId: 1,
+      name: "Test",
+      addr: 2,
+      zip: 5
+    });
+    expect(resp.statusCode).toEqual(400);
+  });
+
+  test("invalid", async function () {
+    const resp = await request(app).post("/shipments").send({
+      username: {}
+    });
+    expect(resp.statusCode).toEqual(400);
+  });
+
 });
+
+
+
